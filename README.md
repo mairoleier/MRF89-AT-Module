@@ -4,4 +4,4 @@ This is  the first version of MRF89XA 868MHz RF module that could be controlled 
 It has integrated MSP430FR5969 module that takes care of the control of the RF module. It stays in low power mode if there is
 no data to handle.
 
-Currently supported AT commands:TBD
+Module web page: http://mairoleier.github.io/MRF89-AT-Module
