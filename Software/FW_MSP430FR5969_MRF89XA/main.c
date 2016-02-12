@@ -1,8 +1,10 @@
 /*
  * main.h
  *
- *  Created  on: 06.02.2015
  *  Author: Mairo Leier, Maksim Gorev
+ *
+ *	Version: 0.4		12.02.2016
+ *	Fix: main.c		MSP goes into LPM1, not anymore LPM3 because UART may skip sometimes first chars
  *
  *  Version: 0.3		15.10.2015
  *  Fix: radio.c:	Radio_Set_Mode()		If radio is set to Rx then it is initialized again because if it
@@ -49,13 +51,6 @@ uint8_t exit_code = 0;		// Exit code number that is set after function exits
  ***************************************************************************************************/
 void main(void) {
 
-	// Initialize system
-	exit_code = System_Init();
-	Print_Error(exit_code);
-
-	UART_Send_Data("\r\nMRF89XA Wireless Module\r\n");
-	UART_Send_Data("Version 0.1\r\n");
-
 	// Initialize default RF settings
 	rf_data.local_addr 	 	= DEF_LOCAL_ADDR;
 	rf_data.network_addr[0] = DEF_NETWORK_ADDR1;
@@ -66,11 +61,17 @@ void main(void) {
 	rf_data.channel_no		= DEF_RF_CHANNEL;
 	rf_data.data_rate		= DEF_RF_DATA_RATE;
 
+	// Initialize system
+	exit_code = System_Init();
+	if (exit_code)
+		Print_Error(exit_code);
+
+	UART_Send_Data("\r\nMRF89XA Wireless Module\r\n");
+	UART_Send_Data("Version 0.1\r\n");
+
 
 	while (1)
 	{
-		__bis_SR_register(LPM3_bits | GIE);       // Enter LPM3, interrupts enabled
-
 		exit_code = 0;
 
 		if (data_rcv_flag) {
@@ -89,7 +90,6 @@ void main(void) {
 			{
 				UART_Send_Data(ANSW_OK);
 				UART_Send_Data("AT:0.1 SW:0.1\r\n");
-				break;
 			}
 			else if (Check_Uart_Answer_Block(CMD_AT_RFSEND,10) == 0)
 			{
@@ -133,6 +133,9 @@ void main(void) {
 		if (radio_mode_receive == 1) {
 			Receive_Rf_Data();
 		}
+
+		// TODO: Use LPM3 together with UART RTS and CTS
+		__bis_SR_register(LPM1_bits | GIE);       // Enter LPM3, interrupts enabled
 
 	}	/* END: WHILE */
 }		/* END: main */

@@ -222,7 +222,7 @@ void itoa(long unsigned int value, char* result, int base)
 
     }
 
-// Convert uint8 to
+// Convert uint8 to byte
 uint32_t UIntToBCD (uint16_t UIntValue) {
   uint32_t converted;
   uint8_t i;

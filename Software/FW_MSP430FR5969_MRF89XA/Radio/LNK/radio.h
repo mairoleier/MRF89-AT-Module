@@ -134,12 +134,12 @@ static const struct Rf_Error_Code_Def rf_error_code[] = {
 // normal struct
 struct rf_struct
 {
-  uint8_t local_addr;
-  uint8_t network_addr[4];
-  uint8_t tx_power;
-  uint8_t channel_no;
-  uint8_t enc_key[16];
-  uint32_t data_rate;
+  uint8_t 	local_addr;
+  uint8_t 	network_addr[4];
+  uint8_t 	tx_power;
+  uint8_t 	channel_no;
+  uint8_t 	enc_key[16];
+  uint32_t 	data_rate;
 };
 
 struct rf_struct rf_data;

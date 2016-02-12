@@ -182,14 +182,14 @@ __interrupt void USCI_A0_ISR(void)
 
 				// Handle new data received from uart
 				memcpy(uart_data, uart_rcv_buf, uart_index);		// Copy received data into buffer
-				uart_data[uart_index] = 0;							// Add terminating NULL
+				uart_data[uart_index] = '\0';						// Add terminating NULL
 				data_rcv_flag = 1;									// Set flag that data is ready for processing
 				uart_index=0;										// Reset uart input buffer index
 			}
 		} else {													// Else just stor received chars into input buffer
 			uart_rcv_buf[uart_index++] = uart_rcv_byte;
 		}
-		__bic_SR_register_on_exit(LPM0_bits); // Exit LPM0 on reti
+		__bic_SR_register_on_exit(LPM3_bits); // Exit LPM0 on reti
 		break;
 
 	case USCI_UART_UCTXIFG: break;
