@@ -169,32 +169,32 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-MSP430FR5969_MRF89XA8_v0.1.out \
+FW_MSP430FR5969_MRF89XA.out \
 
 EXE_OUTPUTS__QUOTED += \
-"MSP430FR5969_MRF89XA8_v0.1.out" \
+"FW_MSP430FR5969_MRF89XA.out" \
 
 BIN_OUTPUTS += \
-MSP430FR5969_MRF89XA8_v0.1.txt \
+FW_MSP430FR5969_MRF89XA.txt \
 
 BIN_OUTPUTS__QUOTED += \
-"MSP430FR5969_MRF89XA8_v0.1.txt" \
+"FW_MSP430FR5969_MRF89XA.txt" \
 
 
 # All Target
-all: MSP430FR5969_MRF89XA8_v0.1.out secondary-outputs
+all: FW_MSP430FR5969_MRF89XA.out secondary-outputs
 
 # Tool invocations
-MSP430FR5969_MRF89XA8_v0.1.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+FW_MSP430FR5969_MRF89XA.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MSP430 Linker'
-	"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/bin/cl430" -vmspx --abi=eabi --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --advice:power=all --advice:hw_config=all -g --define=__MSP430FR5969__ --display_error_number --diag_wrap=off --diag_warning=225 --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --printf_support=minimal -z -m"MSP430FR5969_MRF89XA8_v0.1.map" --stack_size=160 --heap_size=160 --cinit_hold_wdt=on -i"C:/ti/ccsv6/ccs_base/msp430/include" -i"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/lib" -i"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include" -i"C:/ti/ccsv6/ccs_base/msp430/lib/5xx_6xx_FRxx" -i"C:/ti/ccsv6/ccs_base/msp430/lib/FR59xx" --reread_libs --priority --diag_wrap=off --warn_sections --display_error_number --xml_link_info="MSP430FR5969_MRF89XA8_v0.1_linkInfo.xml" --use_hw_mpy=F5 --rom_model -o "MSP430FR5969_MRF89XA8_v0.1.out" $(ORDERED_OBJS)
+	"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/bin/cl430" -vmspx --abi=eabi --code_model=large --data_model=restricted --near_data=none --use_hw_mpy=F5 --advice:power=all --advice:hw_config=all -g --define=__MSP430FR5969__ --diag_warning=225 --display_error_number --diag_wrap=off --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU40 --printf_support=minimal -z -m"FW_MSP430FR5969_MRF89XA.map" --heap_size=160 --stack_size=160 --cinit_hold_wdt=on -i"C:/ti/ccsv6/ccs_base/msp430/include" -i"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/lib" -i"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/include" -i"C:/ti/ccsv6/ccs_base/msp430/lib/5xx_6xx_FRxx" -i"C:/ti/ccsv6/ccs_base/msp430/lib/FR59xx" --reread_libs --priority --warn_sections --display_error_number --diag_wrap=off --xml_link_info="FW_MSP430FR5969_MRF89XA_linkInfo.xml" --use_hw_mpy=F5 --rom_model -o "FW_MSP430FR5969_MRF89XA.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-MSP430FR5969_MRF89XA8_v0.1.txt: $(EXE_OUTPUTS)
+FW_MSP430FR5969_MRF89XA.txt: $(EXE_OUTPUTS)
 	@echo 'Invoking: MSP430 Hex Utility'
-	"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/bin/hex430" --memwidth=8 --romwidth=8 --ti_txt -o "MSP430FR5969_MRF89XA8_v0.1.txt" $(EXE_OUTPUTS__QUOTED)
+	"C:/ti/ccsv6/tools/compiler/ti-cgt-msp430_4.4.6/bin/hex430" --memwidth=8 --romwidth=8 --ti_txt -o "FW_MSP430FR5969_MRF89XA.txt" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building: $@'
 	@echo ' '
 
